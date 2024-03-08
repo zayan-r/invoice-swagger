@@ -26,7 +26,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Pet object that needs to be added to the store"
+        description: "XML Invoice file that is to be rendered"
         required: true
         schema:
           $ref: "#/definitions/XMLInvoice"
@@ -51,7 +51,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Pet object that needs to be added to the store"
+        description: "User details to be registered"
         required: true
         schema:
           $ref: "#/definitions/XMLInvoice"
@@ -62,12 +62,6 @@ paths:
             $ref: "#/definitions/ApiResponse"
         405:
           description: "Invalid XML File Input"
-
-  /loginUser:
-
-  /logoutUser:
-
-  /removeUser:
 securityDefinitions:
   api_key:
     type: "apiKey"
@@ -106,6 +100,18 @@ definitions:
         type: "PNGFile"
       pdfRender:
         type: "PDFFile"
+  UserDetails:  
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+  TokenReturn:
+    type: "object"
+    properties:
+      token:
+        type: "string"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
