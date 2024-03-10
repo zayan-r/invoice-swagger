@@ -38,10 +38,12 @@ paths:
           description: "Successful operation"
           name: HTML File
           content:
-            application/html:
+            application/json:
               schema:
-                type: string
-                example: 'HTML File'
+                type: "object"
+                properties:
+                  file:
+                    ex
         400:
           description: |
             If any of the following are true:
