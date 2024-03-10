@@ -35,52 +35,6 @@ paths:
             - The token is invalid
           schema:
             $ref: '#/definitions/ErrorReturn'
-  /renderPDF:
-    post:
-      tags:
-      - "rendering"
-      summary: "render a PDF file from an inputted XML file"
-      description: ""
-      produces:
-      - "application/json"
-      parameters:
-      - $ref: "#/definitions/RenderInput"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/FileOutput"
-        400:
-          description: |
-            If any of the following are true:
-            - The XML File is invalid
-            - The language is invalid or not supported
-            - The token is invalid
-          schema:
-            $ref: '#/definitions/ErrorReturn'
-  /renderPNG:
-    post:
-      tags:
-      - "rendering"
-      summary: "render a PNG file from an inputted XML file"
-      description: ""
-      produces:
-      - "application/json"
-      parameters:
-      - $ref: "#/definitions/RenderInput"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/FileOutput"
-        400:
-          description: |
-            If any of the following are true:
-            - The XML File is invalid
-            - The language is invalid or not supported
-            - The token is invalid
-          schema:
-            $ref: '#/definitions/ErrorReturn'
   /registerUser:
     post:
       tags:
@@ -196,7 +150,8 @@ definitions:
       schema:
         type: string
   FileOutput:
-    type: "file"
+    type: string
+    example: "exampledomain.com/index.html"
   UserDetails:  
     type: "object"
     properties:
