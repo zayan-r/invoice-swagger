@@ -12,31 +12,69 @@ schemes:
 - "https"
 - "http"
 paths:
-  /render:
+  /renderHTML:
     post:
       tags:
       - "rendering"
-      summary: "render html, png or pdf file from an xml input"
+      summary: "render a HTML file from an inputted XML file"
       description: ""
-      operationId: "uploadFile"
-      consumes:
-      - "application/json"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "XML Invoice file that is to be rendered"
-        required: true
-        schema:
-          $ref: "#/definitions/XMLInvoice"
+      - $ref: "#/definitions/RenderInput"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ApiResponse"
-        405:
-          description: "Invalid XML File Input"
+            $ref: "#/definitions/FileOutput"
+        400:
+          description: |
+            If any of the following are true:
+            - The XML File is invalid
+            - The language is invalid or not supported
+            - The token is invalid
+  /renderPDF:
+    post:
+      tags:
+      - "rendering"
+      summary: "render a PDF file from an inputted XML file"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/definitions/RenderInput"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/FileOutput"
+        400:
+          description: |
+            If any of the following are true:
+            - The XML File is invalid
+            - The language is invalid or not supported
+            - The token is invalid
+  /renderPNG:
+    post:
+      tags:
+      - "rendering"
+      summary: "render a PNG file from an inputted XML file"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - $ref: "#/definitions/RenderInput"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/FileOutput"
+        400:
+          description: |
+            If any of the following are true:
+            - The XML File is invalid
+            - The language is invalid or not supported
+            - The token is invalid
   /registerUser:
     post:
       tags:
@@ -134,31 +172,16 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
-  XMLInvoice:
-    type: "object"
-    properties:
-      invoice:
-        type: "XML file"
-        language:
-          type: "string"
-          example: "English"
-        fileTypes:
-          type: "array"
-          xml:
-            wrapped: true
-          items:
-            type: "string"
-            xml:
-              name: "fileTypes"
-  ApiResponse:
-    type: "object"
-    properties:
-      htmlRender:
-        type: "HTMLFile"
-      pngRender:
-        type: "PNGFile"
-      pdfRender:
-        type: "PDFFile"
+  RenderInput:
+    token:
+      type: string
+    xmlFile:
+      name: "XML file"
+      type: file
+    language:
+      type: string
+  FileOutput:
+    type: "file"
   UserDetails:  
     type: "object"
     properties:
