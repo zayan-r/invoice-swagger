@@ -21,10 +21,22 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - $ref: "#/definitions/RenderInput"
+        - in: header
+          name: token
+          required: true
+          schema:
+            type: string
+        - in: path
+          required: true
+          type: file
+        - in: query
+          name: language
+          required: true
+          schema:
+            type: string
       responses:
         200:
-          description: "successful operation"
+          description: "Successful operation"
           schema:
             $ref: "#/definitions/FileOutput"
         400:
@@ -54,7 +66,7 @@ paths:
           $ref: "#/definitions/UserDetails"
       responses:
         200:
-          description: "successful operation"
+          description: "Successful operation"
           schema:
             $ref: "#/definitions/TokenReturn"
         400:
@@ -116,7 +128,7 @@ paths:
           $ref: "#/definitions/UserDetails"
       responses:
         200:
-          description: "successful operation"
+          description: "Successful operation"
           schema:
             $ref: "#/definitions/EmptyReturn"
         400:
@@ -132,23 +144,6 @@ securityDefinitions:
     name: "api_key"
     in: "header"
 definitions:
-  RenderInput:
-    Token:
-      in: header
-      name: token
-      required: true
-      schema:
-        type: string
-    XMLFile:
-      in: path
-      required: true
-      type: file
-    Language:
-      in: query
-      name: token
-      required: true
-      schema:
-        type: string
   FileOutput:
     type: string
     example: "exampledomain.com/index.html"
