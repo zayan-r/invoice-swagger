@@ -27,6 +27,7 @@ paths:
           schema:
             type: string
         - in: path
+          name: XML file
           required: true
           type: file
         - in: query
