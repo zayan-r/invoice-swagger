@@ -33,6 +33,8 @@ paths:
             - The XML File is invalid
             - The language is invalid or not supported
             - The token is invalid
+          schema:
+            $ref: '#/definitions/ErrorReturn'
   /renderPDF:
     post:
       tags:
@@ -54,6 +56,8 @@ paths:
             - The XML File is invalid
             - The language is invalid or not supported
             - The token is invalid
+          schema:
+            $ref: '#/definitions/ErrorReturn'
   /renderPNG:
     post:
       tags:
@@ -75,6 +79,8 @@ paths:
             - The XML File is invalid
             - The language is invalid or not supported
             - The token is invalid
+          schema:
+            $ref: '#/definitions/ErrorReturn'
   /registerUser:
     post:
       tags:
@@ -173,13 +179,22 @@ securityDefinitions:
     in: "header"
 definitions:
   RenderInput:
-    token:
-      type: string
-    xmlFile:
-      name: "XML file"
+    Token:
+      in: header
+      name: token
+      required: true
+      schema:
+        type: string
+    XMLFile:
+      in: path
+      required: true
       type: file
-    language:
-      type: string
+    Language:
+      in: query
+      name: token
+      required: true
+      schema:
+        type: string
   FileOutput:
     type: "file"
   UserDetails:  
