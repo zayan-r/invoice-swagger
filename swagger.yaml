@@ -43,7 +43,13 @@ paths:
                 type: "object"
                 properties:
                   file:
-                    ex
+                    type: string
+                    example: |
+                      <div>
+                        <h2>Invoice Information</h2>
+                        <p>ID</p>
+                        <p>Issue Date: </p>
+                      </div>
         400:
           description: |
             If any of the following are true:
