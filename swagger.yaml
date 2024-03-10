@@ -39,7 +39,8 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/FileOutput"
+            type: file
+            name: HTML File
         400:
           description: |
             If any of the following are true:
