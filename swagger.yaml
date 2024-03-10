@@ -18,8 +18,6 @@ paths:
       - "rendering"
       summary: "render a HTML file from an inputted XML file"
       description: ""
-      produces:
-      - "application/json"
       parameters:
         - in: header
           name: token
