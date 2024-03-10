@@ -36,9 +36,9 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            type: file
-            name: HTML File
+          name: HTML File
+          content:
+            application/html:
         400:
           description: |
             If any of the following are true:
