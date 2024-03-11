@@ -18,6 +18,8 @@ paths:
       - "rendering"
       summary: "render a HTML file from an inputted XML file"
       description: ""
+      produces:
+      - "application/json"
       parameters:
         - in: header
           name: token
@@ -36,20 +38,17 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          name: HTML File
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  file:
-                    type: string
-                    example: |
-                      <div>
-                        <h2>Invoice Information</h2>
-                        <p>ID</p>
-                        <p>Issue Date: </p>
-                      </div>
+          schema:
+            type: "object"
+            properties:
+              file:
+                type: string
+                example: |
+                  <div>
+                    <h2>Invoice Information</h2>
+                    <p>ID</p>
+                    <p>Issue Date: </p>
+                  </div>
         400:
           description: |
             If any of the following are true:
