@@ -27,7 +27,7 @@ paths:
           schema:
             type: string
         - in: path
-          name: XML file
+          name: XML invoice
           required: true
           type: file
         - in: query
@@ -103,7 +103,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "User details to be registered"
+        description: "User details to login"
         required: true
         schema:
           $ref: "#/definitions/UserDetails"
@@ -132,7 +132,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "User details to be registered"
+        description: "User details to be deactivated"
         required: true
         schema:
           $ref: "#/definitions/UserDetails"
@@ -146,6 +146,66 @@ paths:
             If any of the following are true:
             - User does not exist
             - The password is incorrect
+          schema:
+            $ref: '#/definitions/ErrorReturn'
+  /reactivateUser:
+    put:
+      tags:
+      - "authentication"
+      summary: "reactivate an existing user account"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User details to be reactivated"
+        required: true
+        schema:
+          $ref: "#/definitions/UserDetails"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmptyReturn"
+        400:
+          description: |
+            If any of the following are true:
+            - User does not exist
+            - The password is incorrect
+            - The user is already active
+          schema:
+            $ref: '#/definitions/ErrorReturn'
+  /changeUserPassword:
+    put:
+      tags:
+      - "authentication"
+      summary: "change a user's password"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User details and new password"
+        required: true
+        schema:
+          $ref: "#/definitions/UserDetails"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmptyReturn"
+        400:
+          description: |
+            If any of the following are true:
+            - User does not exist
+            - The password is incorrect
+            - The user is already active
           schema:
             $ref: '#/definitions/ErrorReturn'
 securityDefinitions:
@@ -163,6 +223,15 @@ definitions:
       username:
         type: "string"
       password:
+        type: "string"
+  ChangePassword:  
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      oldPassword:
+        type: "string"
+      newPassword:
         type: "string"
   TokenReturn:
     type: "object"
