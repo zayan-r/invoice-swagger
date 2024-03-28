@@ -194,7 +194,7 @@ paths:
         description: "User details and new password"
         required: true
         schema:
-          $ref: "#/definitions/UserDetails"
+          $ref: "#/definitions/ChangePassword"
       responses:
         200:
           description: "Successful operation"
