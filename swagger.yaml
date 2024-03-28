@@ -3,38 +3,37 @@ swagger: "2.0"
 info:
   title: Sleeper Agents API Routes
   description: "This is a document containing the routes used in our API for invoice rendering"
+  version: '2.0'
 tags:
-- name: "rendering"
+- name: "Rendering"
   description: "Routes for rendering invoices"
-- name: "authentication"
+- name: "Authentication"
   description: "Authenticating users"
-schemes:
-- "https"
-- "http"
+host: sleeperagents1.alwaysdata.net
 paths:
   /renderHTML:
     post:
       tags:
-      - "rendering"
+      - "Rendering"
       summary: "render a HTML file from an inputted XML file"
       description: ""
+      consumes:
+      - "multipart/form-data"
       produces:
       - "application/json"
       parameters:
         - in: header
           name: token
           required: true
-          schema:
-            type: string
-        - in: path
+          type: string
+        - in: formData
           name: XML invoice
           required: true
           type: file
         - in: query
           name: language
           required: true
-          schema:
-            type: string
+          type: string
       responses:
         200:
           description: "Successful operation"
@@ -60,7 +59,7 @@ paths:
   /registerUser:
     post:
       tags:
-      - "authentication"
+      - "Authentication"
       summary: "register a new user to use the API"
       description: ""
       consumes:
@@ -93,7 +92,7 @@ paths:
   /loginUser:
     get:
       tags:
-      - "authentication"
+      - "Authentication"
       summary: "login in an existing user to retrieve their token"
       description: ""
       consumes:
@@ -122,7 +121,7 @@ paths:
   /deactivateUser:
     put:
       tags:
-      - "authentication"
+      - "Authentication"
       summary: "deactivate an existing user account"
       description: ""
       consumes:
@@ -148,66 +147,66 @@ paths:
             - The password is incorrect
           schema:
             $ref: '#/definitions/ErrorReturn'
-  /reactivateUser:
-    put:
-      tags:
-      - "authentication"
-      summary: "reactivate an existing user account"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "User details to be reactivated"
-        required: true
-        schema:
-          $ref: "#/definitions/UserDetails"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/EmptyReturn"
-        400:
-          description: |
-            If any of the following are true:
-            - User does not exist
-            - The password is incorrect
-            - The user is already active
-          schema:
-            $ref: '#/definitions/ErrorReturn'
-  /changeUserPassword:
-    put:
-      tags:
-      - "authentication"
-      summary: "change a user's password"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "User details and new password"
-        required: true
-        schema:
-          $ref: "#/definitions/ChangePassword"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            $ref: "#/definitions/EmptyReturn"
-        400:
-          description: |
-            If any of the following are true:
-            - User does not exist
-            - The password is incorrect
-            - The user is already active
-          schema:
-            $ref: '#/definitions/ErrorReturn'
+  # /reactivateUser:
+  #   put:
+  #     tags:
+  #     - "Authentication"
+  #     summary: "reactivate an existing user account"
+  #     description: ""
+  #     consumes:
+  #     - "application/json"
+  #     produces:
+  #     - "application/json"
+  #     parameters:
+  #     - in: "body"
+  #       name: "body"
+  #       description: "User details to be reactivated"
+  #       required: true
+  #       schema:
+  #         $ref: "#/definitions/UserDetails"
+  #     responses:
+  #       200:
+  #         description: "Successful operation"
+  #         schema:
+  #           $ref: "#/definitions/EmptyReturn"
+  #       400:
+  #         description: |
+  #           If any of the following are true:
+  #           - User does not exist
+  #           - The password is incorrect
+  #           - The user is already active
+  #         schema:
+  #           $ref: '#/definitions/ErrorReturn'
+  # /changeUserPassword:
+  #   put:
+  #     tags:
+  #     - "Authentication"
+  #     summary: "change a user's password"
+  #     description: ""
+  #     consumes:
+  #     - "application/json"
+  #     produces:
+  #     - "application/json"
+  #     parameters:
+  #     - in: "body"
+  #       name: "body"
+  #       description: "User details and new password"
+  #       required: true
+  #       schema:
+  #         $ref: "#/definitions/ChangePassword"
+  #     responses:
+  #       200:
+  #         description: "Successful operation"
+  #         schema:
+  #           $ref: "#/definitions/EmptyReturn"
+  #       400:
+  #         description: |
+  #           If any of the following are true:
+  #           - User does not exist
+  #           - The password is incorrect
+  #           - The user is already active
+  #         schema:
+  #           $ref: '#/definitions/ErrorReturn'
 securityDefinitions:
   api_key:
     type: "apiKey"
