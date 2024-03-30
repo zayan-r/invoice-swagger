@@ -147,66 +147,66 @@ paths:
             - The password is incorrect
           schema:
             $ref: '#/definitions/ErrorReturn'
-  # /reactivateUser:
-  #   put:
-  #     tags:
-  #     - "Authentication"
-  #     summary: "reactivate an existing user account"
-  #     description: ""
-  #     consumes:
-  #     - "application/json"
-  #     produces:
-  #     - "application/json"
-  #     parameters:
-  #     - in: "body"
-  #       name: "body"
-  #       description: "User details to be reactivated"
-  #       required: true
-  #       schema:
-  #         $ref: "#/definitions/UserDetails"
-  #     responses:
-  #       200:
-  #         description: "Successful operation"
-  #         schema:
-  #           $ref: "#/definitions/EmptyReturn"
-  #       400:
-  #         description: |
-  #           If any of the following are true:
-  #           - User does not exist
-  #           - The password is incorrect
-  #           - The user is already active
-  #         schema:
-  #           $ref: '#/definitions/ErrorReturn'
-  # /changeUserPassword:
-  #   put:
-  #     tags:
-  #     - "Authentication"
-  #     summary: "change a user's password"
-  #     description: ""
-  #     consumes:
-  #     - "application/json"
-  #     produces:
-  #     - "application/json"
-  #     parameters:
-  #     - in: "body"
-  #       name: "body"
-  #       description: "User details and new password"
-  #       required: true
-  #       schema:
-  #         $ref: "#/definitions/ChangePassword"
-  #     responses:
-  #       200:
-  #         description: "Successful operation"
-  #         schema:
-  #           $ref: "#/definitions/EmptyReturn"
-  #       400:
-  #         description: |
-  #           If any of the following are true:
-  #           - User does not exist
-  #           - The password is incorrect
-  #           - The user is already active
-  #         schema:
-  #           $ref: '#/definitions/ErrorReturn'
+  /reactivateUser:
+    put:
+      tags:
+      - "Authentication"
+      summary: "reactivate an existing user account"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User details to be reactivated"
+        required: true
+        schema:
+          $ref: "#/definitions/UserDetails"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmptyReturn"
+        400:
+          description: |
+            If any of the following are true:
+            - User does not exist
+            - The password is incorrect
+            - The user is already active
+          schema:
+            $ref: '#/definitions/ErrorReturn'
+  /changeUserPassword:
+    put:
+      tags:
+      - "Authentication"
+      summary: "change a user's password"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User details and new password"
+        required: true
+        schema:
+          $ref: "#/definitions/ChangePassword"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmptyReturn"
+        400:
+          description: |
+            If any of the following are true:
+            - User does not exist
+            - The password is incorrect
+            - The user is already active
+          schema:
+            $ref: '#/definitions/ErrorReturn'
 securityDefinitions:
   api_key:
     type: "apiKey"
