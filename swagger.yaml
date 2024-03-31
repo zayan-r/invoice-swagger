@@ -27,7 +27,7 @@ paths:
           required: true
           type: string
         - in: formData
-          name: XML invoice
+          name: invoice
           required: true
           type: file
         - in: query
