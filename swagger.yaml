@@ -32,7 +32,7 @@ paths:
           required: true
           type: file
           description: "XML file containing invoice information."
-        - in: query
+        - in: formData
           name: language
           required: false
           type: string
@@ -77,7 +77,7 @@ paths:
           required: true
           type: file
           description: "XML file containing invoice information."
-        - in: query
+        - in: formData
           name: language
           required: false
           type: string
