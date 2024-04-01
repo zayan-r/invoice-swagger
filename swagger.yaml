@@ -16,7 +16,7 @@ paths:
       tags:
         - "Rendering"
       summary: "Render an HTML file from an inputted XML file"
-      description: "This route accepts an XML file containing invoice information, generates HTML content based on it, and optionally translates it into different languages."
+      description: ""
       consumes:
         - "multipart/form-data"
       produces:
