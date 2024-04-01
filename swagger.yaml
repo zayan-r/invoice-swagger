@@ -14,46 +14,91 @@ paths:
   /renderHTML:
     post:
       tags:
-      - "Rendering"
-      summary: "render a HTML file from an inputted XML file"
+        - "Rendering"
+      summary: "Render an HTML file from an inputted XML file"
       description: ""
       consumes:
-      - "multipart/form-data"
+        - "multipart/form-data"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
         - in: header
           name: token
           required: true
           type: string
+          description: "Authorization token for accessing the endpoint."
         - in: formData
           name: invoice
           required: true
           type: file
-        - in: query
+          description: "XML file containing invoice information."
+        - in: formData
           name: language
-          required: true
+          required: false
           type: string
+          description: "Language for translating the HTML content (optional). Supported languages: { english, spanish, vietnamese }."
+          enum: ["english", "spanish", "vietnamese"]
       responses:
         200:
-          description: "Successful operation"
+          description: "Successful operation. HTML content generated."
           schema:
             type: "object"
             properties:
-              file:
-                type: string
-                example: |
-                  <div>
-                    <h2>Invoice Information</h2>
-                    <p>ID</p>
-                    <p>Issue Date: </p>
-                  </div>
+              html_content:
+                type: "string"
+                example: "<div><h2>Invoice Information</h2><p>ID</p><p>Issue Date:</p></div>"
+                description: "HTML content generated from the input XML file."
         400:
           description: |
-            If any of the following are true:
-            - The XML File is invalid
-            - The language is invalid or not supported
-            - The token is invalid
+            If any of the following conditions are true:
+            - The XML file is invalid.
+            - The language is invalid or not supported.
+            - The token is invalid.
+          schema:
+            $ref: '#/definitions/ErrorReturn'
+  /renderPDF:
+    post:
+      tags:
+        - "Rendering"
+      summary: "Render a PDF file from an inputted XML file"
+      description: ""
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      parameters:
+        - in: header
+          name: token
+          required: true
+          type: string
+          description: "Authorization token for accessing the endpoint."
+        - in: formData
+          name: invoice
+          required: true
+          type: file
+          description: "XML file containing invoice information."
+        - in: formData
+          name: language
+          required: false
+          type: string
+          description: "Language for rendering the PDF (english, spanish, vietnamese). Defaults to english."
+          enum: ["english", "spanish", "vietnamese"]
+      responses:
+        200:
+          description: "Successful operation. PDF file generated."
+          schema:
+            type: "object"
+            properties:
+              pdf_content:
+                type: "string"
+                example: "JVBERi0xLjQNCg0K..."
+                description: "Base64-encoded representation of the generated PDF file."
+        400:
+          description: |
+            If any of the following conditions are true:
+            - The XML File is invalid.
+            - The language is invalid or not supported.
+            - The token is invalid.
           schema:
             $ref: '#/definitions/ErrorReturn'
   /registerUser:
