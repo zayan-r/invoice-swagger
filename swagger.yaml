@@ -252,6 +252,35 @@ paths:
             - The user is already active
           schema:
             $ref: '#/definitions/ErrorReturn'
+  /deleteUser:
+    delete:
+      tags:
+      - "Authentication"
+      summary: "delete an existing user account"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User details to be deleted"
+        required: true
+        schema:
+          $ref: "#/definitions/UserDetails"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/EmptyReturn"
+        400:
+          description: |
+            If any of the following are true:
+            - User does not exist
+            - The password is incorrect
+          schema:
+            $ref: '#/definitions/ErrorReturn'
 securityDefinitions:
   api_key:
     type: "apiKey"
