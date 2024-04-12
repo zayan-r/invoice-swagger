@@ -135,7 +135,7 @@ paths:
           schema:
             $ref: '#/definitions/ErrorReturn'
   /loginUser:
-    get:
+    post:
       tags:
       - "Authentication"
       summary: "login in an existing user to retrieve their token"
