@@ -9,7 +9,7 @@ tags:
   description: "Routes for rendering invoices"
 - name: "Authentication"
   description: "Authenticating users"
-host: sleeperagents1.alwaysdata.net
+host: https://sleeperagents-de33796aaba3.herokuapp.com
 paths:
   /renderHTML:
     post:
